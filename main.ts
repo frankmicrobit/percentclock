@@ -10,9 +10,6 @@ function ShowPercent (Percent: number) {
     ShowNumber(Math.trunc(Percent / 10), 0)
     ShowNumber(Percent % 10, 3)
 }
-input.onButtonPressed(Button.B, function () {
-	
-})
 function ShowNumber (Number2: number, Offset: number) {
     for (let index = 0; index <= 9; index++) {
         if (index < 5) {
@@ -31,9 +28,16 @@ function ShowNumber (Number2: number, Offset: number) {
     }
 }
 let Time = 0
+music.setVolume(30)
 Time = 0
+let PrevTime = 0
 radio.setGroup(1)
 basic.forever(function () {
-    Time = Math.trunc((control.millis() + 61200000) / 864000)
-    ShowPercent(Time)
+    Time = Math.trunc((control.millis() + 69900000) / 864000)
+    if (Time != PrevTime) {
+        ShowPercent(Time)
+        music.playTone(988, music.beat(BeatFraction.Sixteenth))
+        PrevTime = Time
+    }
+    basic.pause(500)
 })
