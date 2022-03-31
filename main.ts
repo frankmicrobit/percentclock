@@ -1,10 +1,6 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    Time = receivedNumber
-})
-input.onButtonPressed(Button.A, function () {
-    basic.showNumber(Math.trunc(control.millis() / 60000))
-    basic.pause(1000)
-    basic.clearScreen()
+    MilisecsAtReceiveTime = control.millis()
+    TimeReceived = receivedNumber
 })
 function ShowPercent (Percent: number) {
     ShowNumber(Math.trunc(Percent / 10), 0)
@@ -27,13 +23,14 @@ function ShowNumber (Number2: number, Offset: number) {
         }
     }
 }
-let Time = 0
+let TimeReceived = 0
+let MilisecsAtReceiveTime = 0
 music.setVolume(30)
-Time = 0
+let Time = 0
 let PrevTime = 0
 radio.setGroup(1)
 basic.forever(function () {
-    Time = Math.trunc((control.millis() + 69900000) / 864000)
+    Time = Math.trunc((TimeReceived + (control.millis() - MilisecsAtReceiveTime)) / 864000)
     if (Time != PrevTime) {
         ShowPercent(Time)
         music.playTone(988, music.beat(BeatFraction.Sixteenth))
