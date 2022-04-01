@@ -64,7 +64,7 @@ let Reminder = 0
 let MilisecsAtReceiveTime = 0
 let BaseTime = 0
 let FractionToggle = 0
-music.setVolume(30)
+music.setVolume(0)
 FractionToggle = 0
 let Time = 0
 let PrevTime = 0
